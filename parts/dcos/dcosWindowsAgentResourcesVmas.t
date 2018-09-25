@@ -210,6 +210,9 @@
 {{end}}
         "[concat('Microsoft.Network/networkInterfaces/', variables('{{.Name}}VMNamePrefix'), 'nic-', copyIndex(variables('{{.Name}}Offset')))]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('{{.Name}}AvailabilitySet'))]"
+{{if not IsHostedWindowsBootstrap}}
+       ,"[concat('Microsoft.Compute/virtualMachines/', variables('bootstrapWinVMName'), '/extensions/winbootstrapready')]"
+{{end}}
       ],
       "tags":
       {
@@ -239,7 +242,6 @@
           "adminUsername": "[variables('windowsAdminUsername')]",
           "adminPassword": "[variables('windowsAdminPassword')]",
           {{GetDCOSWindowsAgentCustomData .}}
-
         },
         "storageProfile": {
           {{GetDataDisks .}}
