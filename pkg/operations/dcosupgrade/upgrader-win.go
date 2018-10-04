@@ -241,7 +241,7 @@ func (uc *UpgradeCluster) upgradeWindowsBootstrapNode(masterDNS, winBootstrapIP,
 	}
 	// copy bootstrap script to bootstrap node
 	uc.Logger.Infof("Copy Windows bootstrap script to Windows bootstrap node")
-	cmd := fmt.Sprintf("scp -i .ssh/id_rsa_cluster -o ConnectTimeout=30 -o StrictHostKeyChecking=no winBootstrapUpgrade.ps1 %s:C:\\\\AzureData\\\\winBootstrapUpgrade.ps1",
+	cmd := fmt.Sprintf("scp -i .ssh/id_rsa_cluster -o ConnectTimeout=30 -o StrictHostKeyChecking=no winBootstrapUpgrade.ps1 %s:C:\\\\temp\\\\genconf\\\\serve\\\\winBootstrapUpgrade.ps1",
 		winBootstrapIP)
 	strOut, strErr, err = operations.RemoteRun("azureuser", masterDNS, 2200, uc.SSHKey, cmd)
 	if err != nil {
